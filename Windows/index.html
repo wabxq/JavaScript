@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+
+			body{
+				background-color: beige;
+				padding: 0;
+				margin: 0;
+			}
+			table{
+				border-collapse:collapse;
+				border: 1px solid #888;
+				width: 600px;		
+				margin: auto;
+				margin-top: 200px;
+				position: relative;
+			}
+			th,td{
+				border: 1px solid #888;
+				text-align: center;
+			}
+			.all{
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: 0;
+				background-color: rgba(0, 0, 0, .4);
+				z-index: 100;
+			}
+			#btn{
+				position: absolute;
+				top: 160px;
+				right: 510px;
+				background-color: cornflowerblue;
+				border: none;
+				width: 60px;
+				height: 30px;
+			}
+			.text{
+				width: 500px;
+				height: 500px;
+				background-color: gainsboro;
+				position: absolute;
+				top: 70px;
+				right: 450px;
+				z-index: 200;
+			}
+			.btn1{
+				position: absolute;
+				bottom: 50px;
+				left: 250px;
+				background-color: cornflowerblue;
+				border: none;
+				width: 60px;
+				height: 30px;
+			}
+			.btn2{
+				position: absolute;
+				bottom: 50px;
+				left: 150px;
+				background-color: cornflowerblue;
+				border: none;
+				width: 60px;
+				height: 30px;
+			}
+			#inputs{
+				display: none;
+			}
+			#inputs p{
+				display: inline-block;
+				margin-left: 130px;
+				margin-bottom: 30px;
+			}
+			#inputs input{
+				margin-left: 10px;
+				margin-bottom: 30px;
+			}
+			.otitle{
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="Tables">
+			<tr>
+				<th>学号</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>地址</th>
+				<th>删除</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>张三</td>
+				<td>男</td>
+				<td>绍兴</td>
+				<td><a href="javascript:">删除</a></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>李四</td>
+				<td>男</td>
+				<td>杭州</td>
+				<td><a href="javascript:">删除</a></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>王五</td>
+				<td>女</td>
+				<td>温州</td>
+				<td><a href="javascript:">删除</a></td>
+			</tr>
+		</table>
+		<input type="button" id="btn" value="添加" />
+		<div id="inputs">
+			<p>学号:</p><input id='a' type='text'/><br />
+			<p>姓名:</p><input id='b' type='text'/><br />
+			<p>性别:</p><input id='c' type='text'/><br />
+			<p>地址:</p><input id='d' type='text'/><br />
+		</div>
+		<script type="text/javascript">
+			var obtn=document.getElementById("btn");
+			var tables=document.getElementById("Tables");
+			var btn=document.getElementsByTagName('input')[0];
+			var tds=document.querySelectorAll("td a");
+			var oinput=document.getElementById("inputs");
+			var oinputs=document.querySelectorAll("div input");
+			var oa=document.getElementById("a");
+			var ob=document.getElementById("b");
+			var oc=document.getElementById("c");
+			var od=document.getElementById("d");
+			for (var i=0;i<tds.length;i++) {
+				tds[i].addEventListener("click",function(event){
+					event.target.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode);
+				});
+			}
+			obtn.addEventListener("click",function(){				
+				var odiv=document.createElement("div");
+				odiv.className="text";
+				document.body.appendChild(odiv);
+						
+				var otitle=document.createElement("h1");
+				otitle.className="otitle";
+				otitle.innerHTML="信息填写表";
+				odiv.appendChild(otitle);
+				
+				oinput.style.display="block";
+				odiv.appendChild(oinput);
+				var obtn1=document.createElement("button");
+				obtn1.className="btn1";
+				obtn1.innerHTML="关闭";
+				obtn1.addEventListener("click",function(){
+					odiv.style.display="none";
+					oall.style.display="none";
+				})
+				odiv.appendChild(obtn1);
+								
+//				var oinputs=document.createElement("div");
+//				oinputs.className="inputs";
+//				oinputs.innerHTML+="<p>学号:</p><input id='a' type='text'/><br />";
+//				oinputs.innerHTML+="<p>姓名:</p><input id='b' type='text'/><br />";
+//				oinputs.innerHTML+="<p>性别:</p><input id='c' type='text'/><br />";
+//				oinputs.innerHTML+="<p>地址:</p><input id='d' type='text'/><br />";
+//				odiv.appendChild(oinputs);
+				
+				var obtn2=document.createElement("button");
+				obtn2.className="btn2";
+				obtn2.innerHTML="确定";
+				obtn2.addEventListener("click",function(){
+					var row=tables.insertRow(4);
+				var cell0=row.insertCell(0);
+				var cell1=row.insertCell(1);
+				var cell2=row.insertCell(2);
+				var cell3=row.insertCell(3);
+				var cell4=row.insertCell(4);
+				cell0.innerHTML=oa.value;
+				cell1.innerHTML=ob.value;
+				cell2.innerHTML=oc.value;
+				cell3.innerHTML=od.value;
+				var Link=document.createElement('a');
+				Link.innerText="删除";
+				Link.setAttribute('href','#');
+				cell4.appendChild(Link);
+				Link.addEventListener("click",function(event){
+					event.target.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode);
+				});
+					odiv.style.display="none";
+					oall.style.display="none";
+					oinput.style.display="none";
+				})
+				odiv.appendChild(obtn2);
+				
+				var oall = document.createElement("div");
+				oall.className = "all";
+				document.body.appendChild(oall);
+				for(var i = 0; i < oall.length; i++) {
+					oall[i].addEventListener("click", function(){
+					odiv.style.display="block";
+					oall.style.display="block";
+					oinput.style.display="block";
+				});
+
+				}
+			});
+		</script>
+	</body>
+</html>
