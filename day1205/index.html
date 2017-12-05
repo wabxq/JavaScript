@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/css.css" />
+
+	<body class="text">
+			<div class="menu">
+				<ul>
+					<li><button id="red">背景1</button></li>
+					<li><button id="orange">背景2</button></li>
+					<li><button id="green">背景3</button></li>
+					<li><button id="blue">背景4</button></li>
+					<li><button id="purple">背景5</button></li>
+				</ul>
+			</div>
+		<script type="text/javascript">
+			var oRed = document.getElementById("red");
+			var oOrange = document.getElementById("orange");
+			var oGreen = document.getElementById("green");
+			var oBlue = document.getElementById("blue");
+			var oPurple = document.getElementById("purple");
+			var oText = document.querySelector(".text");
+			var curTheme=localStorage.getItem("theme");
+			if(curTheme!=null){
+				oText.dataset.theme=curTheme;
+			}
+//			for (var i=0;i<oButton.length;i++) {
+				oRed.addEventListener("click",setTheme);
+				oOrange.addEventListener("click",setTheme);
+				oGreen.addEventListener("click",setTheme);
+				oBlue.addEventListener("click",setTheme);
+				oPurple.addEventListener("click",setTheme);
+//			}
+			function setTheme(){
+				var target=event.target;
+				var id=target.id;
+				oText.dataset.theme=id;
+				localStorage.setItem("theme",id);
+			}
+		</script>
+	</body>
+
+</html>
